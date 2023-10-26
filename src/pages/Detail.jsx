@@ -31,6 +31,7 @@ function Detail() {
 
   return (
     <div className="content" style={{ padding: '100px 0' }}>
+      <h1>Detail Staff</h1>
       <Paper
         sx={{
           p: 2,

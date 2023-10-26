@@ -11,6 +11,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Avatar } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 function Dashboard() {
   const url = 'https://65375a84bb226bb85dd31896.mockapi.io/api/v1/staffManagement';
@@ -27,6 +28,7 @@ function Dashboard() {
 
   return (
     <div className="content" style={{ padding: '100px 0' }}>
+      <h1>Dashboard</h1>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -56,9 +58,15 @@ function Dashboard() {
                 <TableCell align="left">{row.age}</TableCell>
                 <TableCell align="left">{row.address}</TableCell>
                 <TableCell align="right">
-                  <AddCircleIcon className="custom-icon" />
-                  <EditIcon className="custom-icon" />
-                  <DeleteIcon className="custom-icon" />
+                  <Link to="/add">
+                    <AddCircleIcon className="custom-icon" />
+                  </Link>
+                  <Link to="/update">
+                    <EditIcon className="custom-icon" />
+                  </Link>
+                  <Link to="/remove">
+                    <DeleteIcon className="custom-icon" />
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}
