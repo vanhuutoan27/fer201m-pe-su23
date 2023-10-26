@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Grid } from '@mui/material';
+import Alert from '@mui/material/Alert';
 
 function AddStaff() {
   const url = 'https://65375a84bb226bb85dd31896.mockapi.io/api/v1/staffManagement';
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
+
+  useEffect(() => {
+    if (showSuccessAlert || showErrorAlert) {
+      const timeoutId = setTimeout(() => {
+        setShowSuccessAlert(false);
+        setShowErrorAlert(false);
+      }, 2000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [showSuccessAlert, showErrorAlert]);
 
   const formik = useFormik({
     initialValues: {
@@ -25,7 +39,7 @@ function AddStaff() {
       createdAt: Yup.string().required('CreatedAt is required'),
     }),
 
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       fetch(url, {
         method: 'POST',
         headers: {
@@ -41,9 +55,12 @@ function AddStaff() {
         })
         .then((data) => {
           console.log('Server response:', data);
+          setShowSuccessAlert(true);
+          resetForm();
         })
         .catch((error) => {
           console.error('Error:', error);
+          setShowErrorAlert(true);
         });
     },
   });
@@ -132,6 +149,26 @@ function AddStaff() {
           Add
         </Button>
       </form>
+
+      {showSuccessAlert && (
+        <Alert
+          severity="success"
+          variant="filled"
+          style={{ position: 'fixed', top: '2%', right: '1%' }}
+        >
+          New staff added successfully!
+        </Alert>
+      )}
+
+      {showErrorAlert && (
+        <Alert
+          severity="error"
+          variant="filled"
+          style={{ position: 'fixed', top: '2%', right: '1%' }}
+        >
+          Failed to add new staff!
+        </Alert>
+      )}
     </div>
   );
 }

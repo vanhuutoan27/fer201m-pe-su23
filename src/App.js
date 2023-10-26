@@ -4,7 +4,6 @@ import { Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import AddStaff from './components/AddStaff';
 import UpdateStaff from './components/UpdateStaff';
-import DeleteStaff from './components/DeleteStaff';
 
 import Home from './pages/Home';
 import Detail from './pages/Detail';
@@ -21,8 +20,7 @@ function App() {
         <Route path="/detail/:id" element={<Detail />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/add" element={<AddStaff />}></Route>
-        <Route path="/update" element={<UpdateStaff />}></Route>
-        <Route path="/delete" element={<DeleteStaff />}></Route>
+        <Route path="/update/:id" element={<UpdateStaff />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
       </Routes>
     </div>

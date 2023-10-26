@@ -26,10 +26,11 @@ function Home() {
   return (
     <div className="Home">
       <div className="content" style={{ padding: '100px 0' }}>
+        <h1>Home</h1>
         <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
           {data.map((data) => (
             <Grid item xs={2} sm={4} md={4} key={data.id}>
-              <Card sx={{ maxWidth: 345 }}>
+              <Card sx={{ maxWidth: 345 }} style={{ marginBottom: 20 }}>
                 <CardMedia sx={{ height: 140 }} image={data.avatar} title={data.name} />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
@@ -43,7 +44,7 @@ function Home() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Link to={`detail/${data.id}`}>
+                  <Link to={`/detail/${data.id}`}>
                     <Button size="small">Detail</Button>
                   </Link>
                 </CardActions>
