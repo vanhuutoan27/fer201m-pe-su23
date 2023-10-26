@@ -2,6 +2,7 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 
 import Navigation from './components/Navigation';
+import AddStaff from './components/AddStaff';
 
 import Home from './pages/Home';
 import Detail from './pages/Detail';
@@ -17,6 +18,7 @@ function App() {
         <Route path="/home" element={<Home />}></Route>
         <Route path="/detail/:id" element={<Detail />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route path="/add" element={<AddStaff />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
       </Routes>
     </div>

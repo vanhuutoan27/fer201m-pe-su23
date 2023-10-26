@@ -9,7 +9,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 
 const pages = ['HOME', 'DASHBOARD', 'CONTACT'];
@@ -106,7 +105,10 @@ function Navigation() {
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
-                <Link to={`/${page.toLowerCase()}`} style={{ textDecoration: 'none' }}>
+                <Link
+                  to={page === 'HOME' ? '/' : `/${page.toLowerCase()}`}
+                  style={{ textDecoration: 'none' }}
+                >
                   <Button
                     key={page}
                     onClick={handleCloseNavMenu}
