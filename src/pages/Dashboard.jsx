@@ -44,8 +44,8 @@ function Dashboard() {
 
   useEffect(() => {
     axios(url)
-      .then((response) => response.json())
-      .then((fetchedData) => {
+      .then((response) => {
+        const fetchedData = response.data;
         setData(fetchedData);
       })
       .catch((error) => console.log(error.message));

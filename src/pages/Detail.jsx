@@ -19,8 +19,8 @@ function Detail() {
   useEffect(() => {
     const url = `https://65375a84bb226bb85dd31896.mockapi.io/api/v1/staffManagement/${id}`;
     axios(url)
-      .then((response) => response.json())
-      .then((fetchedData) => {
+      .then((response) => {
+        const fetchedData = response.data;
         setStaff(fetchedData);
       })
       .catch((error) => console.log(error.message));

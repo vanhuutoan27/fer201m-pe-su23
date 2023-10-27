@@ -40,21 +40,13 @@ function AddStaff() {
     }),
 
     onSubmit: (values, { resetForm }) => {
-      axios(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      })
+      axios
+        .post(url, values)
         .then((response) => {
-          if (!response.ok) {
+          if (response.status !== 201) {
             throw new Error('Network response was not ok');
           }
-          return response.json();
-        })
-        .then((data) => {
-          console.log('Server response:', data);
+          console.log('Server response:', response.data);
           setShowSuccessAlert(true);
           resetForm();
         })

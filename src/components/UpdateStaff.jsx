@@ -28,8 +28,8 @@ function UpdateStaff() {
   useEffect(() => {
     const url = `https://65375a84bb226bb85dd31896.mockapi.io/api/v1/staffManagement/${id}`;
     axios(url)
-      .then((response) => response.json())
-      .then((fetchedData) => {
+      .then((response) => {
+        const fetchedData = response.data;
         setStaff(fetchedData);
       })
       .catch((error) => console.log(error.message));
@@ -64,25 +64,17 @@ function UpdateStaff() {
     }),
 
     onSubmit: (values) => {
-      axios(`https://65375a84bb226bb85dd31896.mockapi.io/api/v1/staffManagement/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      })
+      axios
+        .put(`https://65375a84bb226bb85dd31896.mockapi.io/api/v1/staffManagement/${id}`, values)
         .then((response) => {
-          if (!response.ok) {
+          if (response.status !== 200) {
             if (response.status === 404) {
               throw new Error('Staff member not found');
             } else {
               throw new Error('Network response was not ok');
             }
           }
-          return response.json();
-        })
-        .then((data) => {
-          console.log('Server response:', data);
+          console.log('Server response:', response.data);
           setShowSuccessAlert(true);
         })
         .catch((error) => {

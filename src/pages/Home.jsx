@@ -15,9 +15,8 @@ function Home() {
 
   useEffect(() => {
     axios(url)
-      .then((response) => response.json())
-      .then((fetchedData) => {
-        // Order age descending
+      .then((response) => {
+        const fetchedData = response.data;
         const sortedAge = fetchedData.sort((a, b) => b.age - a.age);
         setData(sortedAge);
       })
