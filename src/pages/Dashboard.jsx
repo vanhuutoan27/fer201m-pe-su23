@@ -58,11 +58,10 @@ function Dashboard() {
 
   const confirmDelete = () => {
     if (deletingStaffId) {
-      axios(`${url}/${deletingStaffId}`, {
-        method: 'DELETE',
-      })
+      axios
+        .delete(`${url}/${deletingStaffId}`)
         .then((response) => {
-          if (response.ok) {
+          if (response.status === 200) {
             // Successfully deleted, update the list
             setData(data.filter((staff) => staff.id !== deletingStaffId));
             setShowSuccessAlert(true);
