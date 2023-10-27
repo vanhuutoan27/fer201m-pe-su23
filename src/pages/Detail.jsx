@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { Button, ButtonBase, Grid, Paper } from '@mui/material';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const Img = styled('img')({
   margin: 'auto',
@@ -17,7 +18,7 @@ function Detail() {
 
   useEffect(() => {
     const url = `https://65375a84bb226bb85dd31896.mockapi.io/api/v1/staffManagement/${id}`;
-    fetch(url)
+    axios(url)
       .then((response) => response.json())
       .then((fetchedData) => {
         setStaff(fetchedData);

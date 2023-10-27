@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Grid } from '@mui/material';
 import Alert from '@mui/material/Alert';
+import axios from 'axios';
 
 function AddStaff() {
   const url = 'https://65375a84bb226bb85dd31896.mockapi.io/api/v1/staffManagement';
@@ -28,7 +29,7 @@ function AddStaff() {
       age: '',
       address: '',
       avatar: '',
-      createdAt: '',
+      createdAt: new Date().toISOString(),
     },
 
     validationSchema: Yup.object({
@@ -36,11 +37,10 @@ function AddStaff() {
       age: Yup.number().required('Age is required').integer('Age must be an integer'),
       address: Yup.string().required('Address is required'),
       avatar: Yup.string().url('Avatar must be a valid URL'),
-      createdAt: Yup.string().required('CreatedAt is required'),
     }),
 
     onSubmit: (values, { resetForm }) => {
-      fetch(url, {
+      axios(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -107,6 +107,8 @@ function AddStaff() {
               style={{ marginBottom: '12px' }}
               error={formik.touched.createdAt && Boolean(formik.errors.createdAt)}
               helperText={formik.touched.createdAt ? formik.errors.createdAt : ''}
+              InputProps={{ readOnly: true }}
+              inputProps={{ readOnly: true }}
             />
           </Grid>
         </Grid>

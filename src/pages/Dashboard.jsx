@@ -21,6 +21,7 @@ import {
 } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Dashboard() {
   const url = 'https://65375a84bb226bb85dd31896.mockapi.io/api/v1/staffManagement';
@@ -42,7 +43,7 @@ function Dashboard() {
   }, [showSuccessAlert, showErrorAlert]);
 
   useEffect(() => {
-    fetch(url)
+    axios(url)
       .then((response) => response.json())
       .then((fetchedData) => {
         setData(fetchedData);
@@ -57,7 +58,7 @@ function Dashboard() {
 
   const confirmDelete = () => {
     if (deletingStaffId) {
-      fetch(`${url}/${deletingStaffId}`, {
+      axios(`${url}/${deletingStaffId}`, {
         method: 'DELETE',
       })
         .then((response) => {

@@ -78,9 +78,16 @@ function Navigation() {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
+                  <Link
+                    to={page === 'HOME' ? '/' : `/${page.toLowerCase()}`}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center" style={{ color: '#000' }}>
+                        {page}
+                      </Typography>
+                    </MenuItem>
+                  </Link>
                 ))}
               </Menu>
             </Box>
@@ -112,7 +119,7 @@ function Navigation() {
                   <Button
                     key={page}
                     onClick={handleCloseNavMenu}
-                    sx={{ mr: 6, my: 2, color: 'white', display: 'block' }}
+                    sx={{ mr: 6, my: 2, color: '#fff', display: 'block' }}
                   >
                     {page}
                   </Button>

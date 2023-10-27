@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import { Grid } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function UpdateStaff() {
   const { id } = useParams();
@@ -26,7 +27,7 @@ function UpdateStaff() {
 
   useEffect(() => {
     const url = `https://65375a84bb226bb85dd31896.mockapi.io/api/v1/staffManagement/${id}`;
-    fetch(url)
+    axios(url)
       .then((response) => response.json())
       .then((fetchedData) => {
         setStaff(fetchedData);
@@ -60,11 +61,10 @@ function UpdateStaff() {
       age: Yup.number().required('Age is required').integer('Age must be an integer'),
       address: Yup.string().required('Address is required'),
       avatar: Yup.string().url('Avatar must be a valid URL'),
-      createdAt: Yup.string().required('CreatedAt is required'),
     }),
 
     onSubmit: (values) => {
-      fetch(`https://65375a84bb226bb85dd31896.mockapi.io/api/v1/staffManagement/${id}`, {
+      axios(`https://65375a84bb226bb85dd31896.mockapi.io/api/v1/staffManagement/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -134,6 +134,8 @@ function UpdateStaff() {
               style={{ marginBottom: '12px' }}
               error={formik.touched.createdAt && Boolean(formik.errors.createdAt)}
               helperText={formik.touched.createdAt ? formik.errors.createdAt : ''}
+              InputProps={{ readOnly: true }}
+              inputProps={{ readOnly: true }}
             />
           </Grid>
         </Grid>

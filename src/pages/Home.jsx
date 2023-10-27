@@ -7,13 +7,14 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Home() {
   const url = 'https://65375a84bb226bb85dd31896.mockapi.io/api/v1/staffManagement';
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch(url)
+    axios(url)
       .then((response) => response.json())
       .then((fetchedData) => {
         // Order age descending
