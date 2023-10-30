@@ -11,7 +11,8 @@ function AddStaff() {
   const url = 'https://65375a84bb226bb85dd31896.mockapi.io/api/v1/staffManagement';
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
-
+  const [initialCreatedAt, setInitialCreatedAt] = useState(new Date().toISOString());
+  
   useEffect(() => {
     if (showSuccessAlert || showErrorAlert) {
       const timeoutId = setTimeout(() => {
@@ -23,13 +24,17 @@ function AddStaff() {
     }
   }, [showSuccessAlert, showErrorAlert]);
 
+  useEffect(() => {
+    setInitialCreatedAt(new Date().toISOString());
+  }, []);
+
   const formik = useFormik({
     initialValues: {
       name: '',
       age: '',
       address: '',
       avatar: '',
-      createdAt: new Date().toISOString(),
+      createdAt: initialCreatedAt,
     },
 
     validationSchema: Yup.object({
@@ -56,6 +61,10 @@ function AddStaff() {
         });
     },
   });
+
+  const handleReset = () => {
+    formik.resetForm({ createdAt: initialCreatedAt });
+  };
 
   return (
     <div className="content" style={{ padding: '100px 0', width: '800px' }}>
@@ -128,11 +137,26 @@ function AddStaff() {
         />
 
         <Button
+          type="button"
+          onClick={handleReset}
+          variant="contained"
+          color="primary"
+          style={{
+            marginTop: '2%',
+            marginRight: '4%',
+            padding: '12px 64px',
+            backgroundColor: '#000',
+            color: '#fff',
+          }}
+        >
+          Reset
+        </Button>
+
+        <Button
           type="submit"
           variant="contained"
           color="primary"
           style={{
-            float: 'right',
             marginTop: '2%',
             marginRight: '4%',
             padding: '12px 64px',

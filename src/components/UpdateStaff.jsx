@@ -84,6 +84,16 @@ function UpdateStaff() {
     },
   });
 
+  if (staff === null) {
+    return null;
+  }
+
+  const handleReset = () => {
+    const resetValues = { ...formik.values };
+    resetValues.createdAt = staff ? staff.createdAt : '';
+    formik.resetForm(resetValues);
+  };
+
   return (
     <div className="content" style={{ padding: '100px 0', width: '800px' }}>
       <h1>Update Staff</h1>
@@ -120,12 +130,9 @@ function UpdateStaff() {
             <TextField
               label="CreatedAt"
               name="createdAt"
-              value={formik.values.createdAt}
-              onChange={formik.handleChange}
+              value={staff.createdAt}
               fullWidth
               style={{ marginBottom: '12px' }}
-              error={formik.touched.createdAt && Boolean(formik.errors.createdAt)}
-              helperText={formik.touched.createdAt ? formik.errors.createdAt : ''}
               InputProps={{ readOnly: true }}
               inputProps={{ readOnly: true }}
             />
@@ -155,11 +162,26 @@ function UpdateStaff() {
         />
 
         <Button
+          type="button"
+          onClick={handleReset}
+          variant="contained"
+          color="primary"
+          style={{
+            marginTop: '2%',
+            marginRight: '4%',
+            padding: '12px 64px',
+            backgroundColor: '#000',
+            color: '#fff',
+          }}
+        >
+          Reset
+        </Button>
+
+        <Button
           type="submit"
           variant="contained"
           color="primary"
           style={{
-            float: 'right',
             marginTop: '2%',
             marginRight: '4%',
             padding: '12px 64px',
